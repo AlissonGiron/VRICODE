@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using FACENS.Models;
+using VRICODE.Models;
 
-namespace FACENS.Controllers
+namespace VRICODE.Controllers
 {
     public class HomeController : Controller
     {

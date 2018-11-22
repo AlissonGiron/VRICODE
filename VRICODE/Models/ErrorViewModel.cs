@@ -1,6 +1,6 @@
 using System;
 
-namespace FACENS.Models
+namespace VRICODE.Models
 {
     public class ErrorViewModel
     {

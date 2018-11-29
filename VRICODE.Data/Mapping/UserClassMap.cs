@@ -13,8 +13,8 @@ namespace VRICODE.Data.Mapping
         {
             builder.HasKey(m => new { m.NidUser, m.NidClass });
 
-            builder.HasOne(m => m.User);
-            builder.HasOne(m => m.Class);
+            builder.HasOne(m => m.User).WithMany(m => m.UserClasses);
+            builder.HasOne(m => m.Class).WithMany(m => m.UserClasses);
         }
     }
 }

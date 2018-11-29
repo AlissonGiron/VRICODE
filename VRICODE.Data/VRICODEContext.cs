@@ -7,6 +7,8 @@ namespace VRICODE.Data
 {
     public class VRICODEContext : DbContext
     {
+        public VRICODEContext(DbContextOptions<VRICODEContext> options) : base(options) { }
+
         public DbSet<Class> Classes { get; set; }
         public DbSet<Problem> Problems { get; set; }
         public DbSet<ProblemClass> ProblemClasses { get; set; }

@@ -11,6 +11,9 @@ namespace VRICODE.Data.Mapping
             builder.HasKey(m => m.NidClass);
 
             builder.Property(m => m.NamClass).HasMaxLength(60);
+
+            builder.HasMany(m => m.UserClasses).WithOne(m => m.Class);
+            builder.HasMany(m => m.ProblemClasses).WithOne(m => m.Class);
         }
     }
 }

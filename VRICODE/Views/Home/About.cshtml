@@ -1,7 +1,151 @@
 ﻿@{
     ViewData["Title"] = "About";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
+<style>
+    body {
+        background-color: grey;
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,1)), url("/images/background-login.JPG");
+        background-size: cover;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .login-form {
+        height: 80vh;
+        background-color: white;
+        margin-top: 10vh;
+        padding: 0;
+        z-index: 10;
+    }
+
+    .login-form div {
+        opacity: 1;
+    }
+
+    .btn-primary {
+        padding: 15px 30px;
+        box-shadow: 2px 2px 0px darkslategrey;
+        border-radius: 0;
+        float: right;
+        font-size: 12px;
+        margin: 2px;
+    }
+
+    .btn-primary span {
+        color: white;
+    }
+
+    input.form-control {
+        border-radius: 0;
+    }
+
+    #footer-info {
+        position: absolute;
+        right: 10px;
+        text-align: right;
+        bottom: 0;
+        color: white;
+        font-size: 10px;
+    }
+
+    .ball {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: white;
+        border-radius: 100%;
+    }
+</style>
+
+<div class="row">
+    <form class="col-xs-4 col-xs-offset-4 login-form">
+        <div class="col-xs-2" style="background-color: lightgrey; height: 100%;">
+        </div>
+        <div class="col-xs-10" style="padding: 50px;">
+            <div class="row">
+                <img src="/images/logo-facens.png">
+            </div>            
+
+            <br>
+            <br>
+            <div class="row">
+                <label>
+                    <span class="glyphicon glyphicon-user" style="color: steelblue; text-align: center;"></span> 
+                    Usuário
+                </label>
+                <input class="form-control" type="text" value=""/>
+            </div>
+            <br>
+            <div class="row">
+                <label>
+                    <span class="glyphicon glyphicon-file" style="color: steelblue; text-align: center;"></span> 
+                    Senha
+                </label>
+                <input class="form-control" type="password" value=""/>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <button class="btn btn-primary">
+                    <span class="glyphicon glyphicon-log-in" style="text-align: center;"></span> 
+                     Entrar
+                </button>
+                <button class="btn btn-primary">
+                    <span class="glyphicon glyphicon-list-alt" style="text-align: center;"></span> 
+                     Cadastro
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div id="footer-info">
+        <p>TECNOLOGIAS WEB - LAB</p>
+        <p>Alisson Giron - 163011</p>
+        <p>Gabriel Belchior - 160060</p>
+    </div>
+</div>
+
+
+<script>
+    var bubbles_list = []
+
+    function bubble(x, y, width, height, color)
+    {
+        this.x = x + "px";
+        this.y = y + "px";
+        this.width = width + "px";
+        this.height = height + "px";
+        this.color = color;
+    }
+
+    function getBubbleStyle(bubble)
+    {
+        return ["left:", bubble.x, "; bottom:", bubble.y, "; width:", bubble.width, "; height:", bubble.height, "; background-color:", bubble.color].join(" ");
+    }
+
+    function getColor(index) 
+    {
+        return index % 2 == 0 ? "darkslategray" : "grey";
+    }
+
+    $(document).ready(function() {
+
+        for(var i = 0; i < 10; i++)
+        {
+            bubbles_list.push(new bubble(-100 + (i*200), -100 + ( (i%2) * 100 ), 200, 200, getColor(i)))
+        }
+
+        console.log(bubbles_list)
+
+        bubbles_list.forEach(function(bubble) {
+            $("body").append("<div class='ball' style='"+ getBubbleStyle(bubble) +"'></div>");
+        })
+
+    })
+
+
+</script>

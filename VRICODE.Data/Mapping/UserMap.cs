@@ -15,6 +15,9 @@ namespace VRICODE.Data.Mapping
 
             builder.Property(m => m.DesEmail).HasMaxLength(256);
             builder.Property(m => m.DesPassword).HasMaxLength(256);
+
+            builder.HasMany(m => m.UserClasses).WithOne(m => m.User);
+            builder.HasMany(m => m.UserProblems).WithOne(m => m.User);
         }
     }
 }

@@ -12,6 +12,10 @@ namespace VRICODE.Data.Mapping
 
             builder.Property(m => m.DesTitle).HasMaxLength(60);
             builder.Property(m => m.DesProblem).HasMaxLength(4096);
+
+            builder.HasMany(m => m.ProblemClasses).WithOne(m => m.Problem);
+            builder.HasMany(m => m.ProblemTests).WithOne(m => m.Problem);
+            builder.HasMany(m => m.ProblemUsers).WithOne(m => m.Problem);
         }
     }
 }

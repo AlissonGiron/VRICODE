@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VRICODE.Data;
 
 namespace VRICODE
 {
@@ -31,6 +33,9 @@ namespace VRICODE
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            string LConnectionString = Configuration.GetConnectionString("Default");
+
+            services.AddDbContext<VRICODEContext>(options => options.UseSqlServer(LConnectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -50,7 +55,17 @@ namespace VRICODE
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+
+            // Não vai pra europa esse site
+            // app.UseCookiePolicy();
+
+            DbContextOptionsBuilder<VRICODEContext> LOptionsBuilder = new DbContextOptionsBuilder<VRICODEContext>();
+            LOptionsBuilder.UseSqlServer(Configuration.GetConnectionString("Default"));
+
+            using (VRICODEContext LContext = new VRICODEContext(LOptionsBuilder.Options))
+            {
+                LContext.Database.Migrate();
+            }
 
             app.UseMvc(routes =>
             {

@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VRICODE.Models\VRICODE.Models.csproj" />
+    <ProjectReference Include="..\VRICODE.Data\VRICODE.Data.csproj" />
   </ItemGroup>
 
 </Project>

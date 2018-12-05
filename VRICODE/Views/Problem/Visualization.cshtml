@@ -1,0 +1,140 @@
+@{
+    ViewData["Title"] = "Group";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
+<style>
+    body {
+        height: 100vh;
+        background-color: #ccc;
+    }
+
+    .background {
+        background-color: grey;
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.9)), url("/images/background-login.JPG") fixed;
+        background-size: cover;
+    }
+
+    .vri-content {
+        background-color: white;
+        padding: 0;
+        z-index: 10;
+    }
+
+    .jumbotron a {
+        color: white;
+        text-decoration: none;
+        padding-right: 50px;
+        font-family: monospace;
+        font-size: 12px;
+    }
+
+    textarea {
+        height: 50vh;
+    }
+
+    .send-button {
+        height: 50px;
+        border-radius: 0;
+        box-shadow: 2px 2px 2px grey;
+        background-color: darkslategray;
+        color: white;
+    }
+
+</style>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-8 col-xs-offset-2">
+
+                        <code class="row">
+                            <label class="form-label">Código</label>
+                            <textarea rows="20" type="text" class="form-control"></textarea>
+                        </code>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn primary send-button"><span class="glyphicon glyphicon-import"></span> Enviar Código</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="overflow: auto; margin-bottom: 100px; box-shadow: 5px 5px 5px grey;">
+    <div class="col-xs-12 vri-content">
+        <div class="jumbotron background" style="height: 50vh; color: white; position: relative; border-radius: 0;">
+
+            <a class="pull-left" href="#"><span class="glyphicon glyphicon-home"></span> Início</a>
+
+            <a class="pull-right" href="#"><span class="glyphicon glyphicon-log-out"></span> Sair</a>
+            <a class="pull-right" href="#"><span class="glyphicon glyphicon-book"></span> Exercícios</a>
+            <a class="pull-right" href="#"><span class="glyphicon glyphicon-tag"></span> Turmas</a>
+
+            <h2 style="position: absolute; bottom: 20px;">Exercício Nº4245:  In at tortor at mi hendrerit ullamcorper.</h2>
+        </div>
+        <br>
+        <div class="col-xs-8  col-xs-offset-2" style="padding-bottom: 100px; line-height: 2em; color: grey;">
+            <div class="row">
+                <label class="form-label" style="text-align: justify; font-size: 14px;">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget neque sed nulla luctus volutpat. Suspendisse at odio imperdiet, consequat quam condimentum, sollicitudin erat. Fusce imperdiet, mauris quis convallis tempus, ligula metus pharetra diam, eget vulputate nisl tellus a leo. Nunc et augue nec sapien blandit pretium ac vel justo. Nam et dui euismod massa accumsan pharetra. Mauris tincidunt aliquet arcu, vel posuere sem pharetra quis. Phasellus vehicula orci eget eros laoreet bibendum. Suspendisse potenti. Nullam dictum elit vel ipsum varius sollicitudin.
+    Etiam venenatis ultricies tortor eget venenatis. Sed at ullamcorper urna. Nunc quis nunc dignissim, convallis tortor in, posuere quam. Nulla varius erat erat, vitae molestie lorem mollis vel. Nam quis diam at mi tincidunt scelerisque. Curabitur elementum sapien est. Nam lobortis enim neque, a tincidunt nulla faucibus ac. Suspendisse nec venenatis magna. Morbi ut tortor aliquam, gravida nibh id, feugiat leo.
+    Proin porta rutrum augue, sit amet consectetur urna scelerisque at. Phasellus tincidunt nunc eu nunc vestibulum, nec ullamcorper ipsum lacinia. Vivamus purus enim, malesuada et turpis at, consectetur tempus erat. Nunc ac commodo elit, in convallis ante. Nullam vitae tellus sed arcu pretium fermentum. Quisque at dui dui. Nullam et finibus nisl. Phasellus molestie at risus nec tincidunt. Sed et diam massa. Sed id massa vitae leo varius sagittis. Etiam et nulla vitae turpis tincidunt sollicitudin sed eget urna. Morbi sit amet sapien nisl.
+    Nullam semper tincidunt quam ac efficitur. Phasellus porta lectus at cursus posuere. Cras venenatis vehicula turpis eu feugiat. Donec id facilisis mauris. Mauris ac sapien sagittis arcu lobortis molestie ut eu arcu. Ut fringilla in leo vitae placerat. Aenean pulvinar, ligula a laoreet aliquam, tellus massa fringilla mauris, ut eleifend velit nulla non metus. Maecenas in sodales metus. Praesent porta lacus nec felis cursus, non tempor turpis dapibus.
+Morbi ac augue in augue ultrices sagittis vitae ac lacus. Fusce congue magna eget tincidunt eleifend. Aliquam consectetur metus vel elit lacinia, vel rhoncus dolor porta. Vestibulum nisi dui, condimentum in urna eu, rutrum pellentesque justo. Aenean eleifend ac enim non egestas. Aliquam non est vitae orci blandit varius a id mauris. Nulla nec sodales est, non eleifend diam. Aenean fermentum nulla in sapien placerat auctor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lobortis pretium porta. Vestibulum orci urna, consectetur a ante id, feugiat sodales quam. Duis augue arcu, ultrices nec suscipit ac, aliquam id ipsum. Nulla at turpis fringilla, sodales nisl eu, tempor quam. </label>
+            </div>
+
+            <br>
+            <br>
+
+            <h4>Casos de Teste</h4>
+            <hr>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Entrada</th>
+                    <th scope="col">Saída Esperada</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10</td>
+                        <td>Resposta: 22</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>Resposta: 15</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>Resposta: 24</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+
+            <button type="button" class="send-button btn btn-primary col-xs-12" data-toggle="modal" data-target="#exampleModal">
+                <span class="glyphicon glyphicon-import"></span> Enviar Tentativa
+            </button>
+
+            <br>
+            <br>
+        </div>    
+    </div>
+</div>

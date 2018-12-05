@@ -15,49 +15,44 @@
     }
 
     .vri-content {
-        height: 80vh;
+        height: calc(100vh - 50px);
         background-color: white;
         padding: 0;
         z-index: 10;
-        height: 100vh;
-    }
-
-    .btn-primary {
-        padding: 15px 30px;
-        box-shadow: 2px 2px 0px darkslategrey;
-        border-radius: 0;
-        float: right;
-        font-size: 12px;
-        margin: 2px;
-    }
-
-    .btn-primary span {
-        color: white;
-    }
-
-    input.form-control {
-        border-radius: 0;
-    }
-
-    #footer-info {
-        position: absolute;
-        right: 10px;
-        text-align: right;
-        bottom: 0;
-        color: white;
-        font-size: 10px;
-    }
-
-    .ball {
-        position: absolute;
-        width: 200px;
-        height: 200px;
-        background-color: white;
-        border-radius: 100%;
+        margin-top: 50px;
     }
 </style>
 
 <div class="row">
     <div class="col-xs-12 vri-content">
+        <div class="jumbotron">
+            <h4>Ingressar em uma turma</h4>
+            <div class="col-xs-10">
+                <input type="text" class="col-xs-12" placeholder="Digite o código da Turma:">
+            </div>
+            <div class="col-xs-2">
+                <button class="btn btn-primary">Entrar na Turma</button>
+            </div>
+            <br>
+        </div>
+
+        <div class="col-xs-8  col-xs-offset-2">
+            <h4>Minhas Turmas</h4>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td colspan="3">
+                            <span class="form-control">
+                                Turma 1
+                            </span>
+                        </td>
+                        <td>
+                            <a class="btn btn-default">Acessar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>    
+
     </div>
 </div>

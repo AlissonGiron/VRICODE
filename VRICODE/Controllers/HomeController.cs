@@ -34,5 +34,15 @@ namespace VRICODE.Controllers
             return View();
         }
 
+        public IActionResult Group()
+        {
+            return View();
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
     }
 }

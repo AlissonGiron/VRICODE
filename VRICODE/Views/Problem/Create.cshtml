@@ -1,0 +1,113 @@
+@{
+    ViewData["Title"] = "Group";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
+<style>
+    body {
+        background-color: grey;
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,1)), url("/images/background-login.JPG");
+        background-size: cover;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .vri-content {
+        height: calc(100vh - 50px);
+        background-color: white;
+        padding: 0;
+        z-index: 10;
+        margin-top: 50px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-xs-12 vri-content">
+        <div class="jumbotron">
+            <h3>Exercicio (Novo)</h3>
+        </div>
+
+        <div class="col-xs-8  col-xs-offset-2">
+            <div class="row">
+                <label class="form-label">Título</label>
+                <input type="text" class="form-control">
+            </div>
+            <br>
+            <div class="row">
+                <label class="form-label">Enunciado</label>
+                <textarea class="form-control"></textarea>
+            </div>
+
+            <br>
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Adicionar Teste
+            </button>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Visivel para estudantes</th>
+                    <th scope="col">Input</th>
+                    <th scope="col">Output</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" checked></td>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                </tbody>
+                </table>
+
+
+            <br>
+            <br>
+            <button class="btn btn-primary pull-right">Salvar Exercício</button>
+        </div>    
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+
+                <div class="row">
+                    <label class="form-label">Input</label>
+                    <input type="text" class="form-control">
+                </div>
+                <br>
+                <div class="row">
+                    <label class="form-label">Output</label>
+                    <input type="text" class="form-control">
+                </div>
+                <br>
+                <div class="row">
+                    <label class="form-label">Visivel para estudantes</label>
+                    <input type="checkbox" checked>
+                </div>
+            </div>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Criar Teste</button>
+      </div>
+    </div>
+  </div>
+</div>

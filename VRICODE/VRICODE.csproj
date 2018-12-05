@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VRICODE.Core\VRICODE.Core.csproj" />
     <ProjectReference Include="..\VRICODE.Models\VRICODE.Models.csproj" />
     <ProjectReference Include="..\VRICODE.Data\VRICODE.Data.csproj" />
     <ProjectReference Include="..\VRICODE.Data.Interfaces\VRICODE.Data.Interfaces.csproj" />

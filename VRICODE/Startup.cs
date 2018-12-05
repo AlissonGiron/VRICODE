@@ -10,7 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VRICODE.Core;
 using VRICODE.Data;
+using VRICODE.Interfaces.Core;
+using VRICODE.Interfaces.Data;
 
 namespace VRICODE
 {
@@ -36,6 +39,22 @@ namespace VRICODE
             string LConnectionString = Configuration.GetConnectionString("Default");
 
             services.AddDbContext<VRICODEContext>(options => options.UseSqlServer(LConnectionString));
+
+            services.AddScoped<IClassRepository, ClassRepository>();
+            services.AddScoped<IProblemClassRepository, ProblemClassRepository>();
+            services.AddScoped<IProblemRepository, ProblemRepository>();
+            services.AddScoped<IProblemTestRepository, ProblemTestRepository>();
+            services.AddScoped<IProblemUserRepository, ProblemUserRepository>();
+            services.AddScoped<IUserClassRepository, UserClassRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IClassCore, ClassCore>();
+            services.AddScoped<IProblemClassCore, ProblemClassCore>();
+            services.AddScoped<IProblemCore, ProblemCore>();
+            services.AddScoped<IProblemTestCore, ProblemTestCore>();
+            services.AddScoped<IProblemUserCore, ProblemUserCore>();
+            services.AddScoped<IUserClassCore, UserClassCore>();
+            services.AddScoped<IUserCore, UserCore>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

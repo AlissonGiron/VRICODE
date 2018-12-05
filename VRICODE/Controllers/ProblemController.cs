@@ -14,5 +14,9 @@ namespace VRICODE.Controllers
         {
             return View();
         }
+
+        public IActionResult Visualization() {
+            return View();
+        }
     }
 }

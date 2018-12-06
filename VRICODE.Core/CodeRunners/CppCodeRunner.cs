@@ -9,24 +9,28 @@ namespace VRICODE.Core.CodeRunners
 {
     public static class CppCodeRunner
     {
+        private static readonly string FRootFolder = "C:\\Temp\\Cpp";
+
+        static CppCodeRunner()
+        {
+            Directory.CreateDirectory(FRootFolder);
+        }
+
         public static CodeRunnerOutput Run(string ACode, string AInput)
         {
-            string LBaseDir = "C\\Temp\\";
-
-
             CodeRunnerOutput LOutput = new CodeRunnerOutput
             {
                 Status = CodeRunnerStatus.Success
             };
 
-            string LFileName = $"CppRun{DateTime.Now.Ticks}";
+            string LFileName = $"{FRootFolder}\\CppRun{DateTime.Now.Ticks}";
 
             string LDestCodeFileName = $"{LFileName}.cpp";
             string LDestBinFileName = $"{LFileName}.exe";
 
             File.WriteAllText(LDestCodeFileName, ACode);
 
-            using (Process LGccProcess = Process.Start("gcc", $"--pass-exit-codes -c {LDestCodeFileName} -o {LDestBinFileName}"))
+            using (Process LGccProcess = Process.Start("gcc", $"{LDestCodeFileName} -o {LDestBinFileName} --pass-exit-codes"))
             {
                 LGccProcess.WaitForExit();
 
@@ -39,8 +43,19 @@ namespace VRICODE.Core.CodeRunners
                 }
             }
 
-            using (Process LBinProcess = Process.Start(LDestBinFileName))
+            using (Process LBinProcess = new Process())
             {
+                LBinProcess.StartInfo = new ProcessStartInfo
+                {
+                    FileName = LDestBinFileName,
+                    RedirectStandardOutput = true
+                };
+
+                LBinProcess.OutputDataReceived += (s, e) => LOutput.Output += e.Data;
+
+                LBinProcess.Start();
+                LBinProcess.BeginOutputReadLine();
+
                 foreach (char LCharacter in AInput)
                 {
                     LBinProcess.StandardInput.Write(LCharacter);
@@ -53,8 +68,6 @@ namespace VRICODE.Core.CodeRunners
                     LOutput.Status = CodeRunnerStatus.TimeLimit;
                     return LOutput;
                 }
-
-                LOutput.Output = LBinProcess.StandardOutput.ReadToEnd();
             }
 
             return LOutput;

@@ -16,6 +16,21 @@
         background-color: darkslategray;
         color: white;
     }
+
+    .problem-result {
+        width: 100%;
+        height: 1.5em;
+        font-weight: bold;
+        color: white;
+    }
+
+    .problem-result.success {
+        background-color: green;
+    }
+
+    .problem-result.failure {
+        background-color: red;
+    }
 </style>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -79,6 +94,10 @@
     </table>
     <br>
 
+    <div class="problem-result">
+
+    </div>
+
     <button type="button" class="send-button btn btn-primary col-xs-12" data-toggle="modal" data-target="#exampleModal">
         <span class="glyphicon glyphicon-import"></span> Enviar Tentativa
     </button>
@@ -96,7 +115,26 @@
                 ADesCode: $('.code-area').val()
             }
         }).done((result) => {
-            console.log(result);
+            if (result.status == 0) {
+                $('.problem-result').text("Solução aceita!");
+                $('.problem-result').removeClass("success failure");
+                $('.problem-result').addClass("success");
+            }
+            else if (result.status == 1) {
+                $('.problem-result').text("Erro de Compilação");
+                $('.problem-result').removeClass("success failure");
+                $('.problem-result').addClass("failure");
+            }
+            else if (result.status == 2) {
+                $('.problem-result').text("Resposta Incorreta");
+                $('.problem-result').removeClass("success failure");
+                $('.problem-result').addClass("failure");
+            }
+            else if (result.status == 3) {
+                $('.problem-result').text("Tempo Limite Excedido");
+                $('.problem-result').removeClass("success failure");
+                $('.problem-result').addClass("failure");
+            }
         });
     }
 </script>

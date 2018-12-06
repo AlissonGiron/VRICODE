@@ -14,6 +14,7 @@ namespace VRICODE.Models
     {
         Success,
         CompilerError,
-        WrongAnswer
+        WrongAnswer,
+        TimeLimit
     }
 }

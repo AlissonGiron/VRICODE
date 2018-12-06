@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using VRICODE.Models;
 using VRICODE.Models.ViewModels;
 
@@ -56,28 +57,45 @@ namespace VRICODE.Core.Evaluators
                 {
                     FileName = LDestBinFileName,
                     RedirectStandardInput = true,
-                    RedirectStandardOutput = true
+                    RedirectStandardOutput = true,
+                };
+
+                int LIdx = 0;
+                LBinProcess.OutputDataReceived += (s, e) =>
+                {
+                    LCodeResult.Output += e.Data;
+
+                    if (String.IsNullOrWhiteSpace(e.Data)) return;
+
+                    if (!String.Equals(e.Data, AExpectedOutputs[LIdx++]))
+                    {
+                        LCodeResult.Status = EvaluatorStatus.WrongAnswer;
+                    }
+
+                    if (LIdx == AInputs.Length)
+                    {
+                        LIdx++;
+                    }
                 };
 
                 LBinProcess.Start();
+                LBinProcess.BeginOutputReadLine();
 
                 for (int i = 0; i < AInputs.Length; i++)
                 {
-                    LBinProcess.StandardInput.Write(AInputs[0]);
-                    string LOutput = "";
+                    LBinProcess.StandardInput.Write(AInputs[i] + "\n");
+                }
 
-                    while (LBinProcess.StandardOutput.Peek() > -1)
-                    {
-                        LOutput += LBinProcess.StandardOutput.Read();
-                    }
-
-                    LCodeResult.Output += LOutput;
-
-                    if (!String.Equals(LOutput, AExpectedOutputs[i]))
-                    {
-                        LCodeResult.Status = EvaluatorStatus.WrongAnswer;
-                        return LCodeResult;
-                    }
+                bool LGracefulExit = LBinProcess.WaitForExit(1000);
+                if (!LGracefulExit)
+                {
+                    LCodeResult.Status = EvaluatorStatus.TimeLimit;
+                    LBinProcess.Kill();
+                }
+                
+                while (LGracefulExit && LIdx <= AInputs.Length)
+                {
+                    Thread.Sleep(10);
                 }
             }
 

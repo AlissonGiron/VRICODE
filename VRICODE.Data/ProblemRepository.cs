@@ -11,6 +11,12 @@ namespace VRICODE.Data
         {
         }
 
+        public void CreateProblemClass(ProblemClass AProblemClass)
+        {
+            FContext.Add(AProblemClass);
+            FContext.SaveChanges();
+        }
+
         public override Problem Get(params object[] AKeys)
         {
             return FDbSet

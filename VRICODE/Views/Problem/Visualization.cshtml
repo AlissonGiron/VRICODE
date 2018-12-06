@@ -7,6 +7,8 @@
 <style>
     textarea {
         height: 50vh;
+        max-width: 100%;
+        min-width: 100%;
     }
 
     .send-button {
@@ -31,7 +33,7 @@
                     <div class="col-xs-8 col-xs-offset-2">
 
                         <code class="row">
-                            <label class="form-label">Código</label>
+                            <label class="form-label" style="display: block">Código</label>
                             <textarea class="code-area" rows="20" type="text" class="form-control"></textarea>
                         </code>
 
@@ -48,7 +50,7 @@
 </div>
 
 <div class="col-xs-8 col-xs-offset-2" style="padding-bottom: 100px; line-height: 2em; color: grey;">
-    <div class="row">
+    <div class="row" style="word-break: break-word;">
         <label class="form-label" style="text-align: justify; font-size: 14px;">
             @Model.DesProblem
         </label>

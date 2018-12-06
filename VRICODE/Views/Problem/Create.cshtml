@@ -2,7 +2,15 @@
     ViewData["Title"] = "Exercício (Novo)";
 }
 
+@model int
+<style>
+    #testValues input {
+        border: 0;
+    }
+</style>
+
 <form asp-controller="Problem" asp-action="Create" method="POST" class="col-xs-8 col-xs-offset-2">
+            <input type="hidden" name="ANidClass" value="@Model">
             <div class="row">
                 <label class="form-label">Título</label>
                 <input name="DesTitle" type="text" class="form-control">
@@ -10,7 +18,7 @@
             <br>
             <div class="row">
                 <label class="form-label">Enunciado</label>
-                <textarea name="DesProblem" class="form-control"></textarea>
+                <textarea name="DesProblem" rows="20" class="form-control"></textarea>
             </div>
 
             <br>

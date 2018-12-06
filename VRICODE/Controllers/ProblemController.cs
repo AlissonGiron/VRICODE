@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using VRICODE.Core.CodeRunners;
 using VRICODE.Interfaces.Core;
 using VRICODE.Models;
 
@@ -23,24 +24,25 @@ namespace VRICODE.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public IActionResult Create(Problem AProblem)
         {
-            try {
+            try
+            {
                 FCore.Create(AProblem);
                 FCore.Save();
 
                 return RedirectToAction("Index", "Class");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex);
             }
         }
 
-        public IActionResult Visualization() {
-
+        public IActionResult Visualization()
+        {
             Problem LProblem = new Problem();
             LProblem.DesTitle = "Exercicio 0341: dojoijiowejqoe";
             LProblem.DesProblem = "ew1ewedkiojiojioejiw1e2";

@@ -19,9 +19,25 @@
 <body>
     <partial name="_CookieConsentPartial" />
 
-    <div class="container">
-        @RenderBody()
+    <div class="row" style="overflow: auto; margin: 0;">
+        <div class="col-xs-10 col-xs-offset-1" style="margin-bottom: 100px; box-shadow: 5px 5px 5px grey; padding: 0;">
+            <div class="jumbotron background" style="height: 50vh; color: white; position: relative; border-radius: 0;">
+                <a class="pull-left" href="/Home/Index"><span class="glyphicon glyphicon-home"></span> Início</a>
+                @if(ViewData["LoginPage"] == null || !((bool)ViewData["LoginPage"]))
+                {
+                    <a class="pull-right" href="#"><span class="glyphicon glyphicon-log-out"></span> Sair</a>
+                    <a class="pull-right" href="/Class/Index"><span class="glyphicon glyphicon-tag"></span> Turmas</a>
+                }
+
+                <h2 style="position: absolute; bottom: 20px;">@(ViewData["Title"])</h2>
+            </div>
+            <div class="col-xs-12" style="padding-bottom: 100px; line-height: 2em; color: grey; background-color: white;">
+                <br>
+                @RenderBody()
+            </div>    
+        </div>
     </div>
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

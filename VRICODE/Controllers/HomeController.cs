@@ -36,7 +36,27 @@ namespace VRICODE.Controllers
 
         public IActionResult Group()
         {
-            return View();
+            Class LClass = new Class();
+            LClass.NamClass = "EPN001";
+            LClass.ProblemClasses = new List<ProblemClass>() {
+                new ProblemClass() {
+                    Problem = new Problem() {
+                        DesTitle = "OI"
+                    }
+                },
+                new ProblemClass() {
+                    Problem = new Problem() {
+                        DesTitle = "Tudo"
+                    }
+                },
+                new ProblemClass() {
+                    Problem = new Problem() {
+                        DesTitle = "Joia"
+                    }
+                }
+            };
+
+            return View(LClass);
         }
 
         public IActionResult Create()

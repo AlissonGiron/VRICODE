@@ -1,0 +1,28 @@
+@model Class
+
+@{
+    ViewData["Title"] = Model.NamClass;
+}
+
+<a class="btn btn-primary pull-right" href="/Problem/Create">Adicionar Exercicio</a>
+
+<div class="col-xs-8  col-xs-offset-2">
+    <h4>Exercícios</h4>
+    <table class="table table-bordered">
+        <tbody>
+            @foreach (var item in Model.ProblemClasses)
+            {
+                <tr>
+                    <td colspan="3">
+                        <span class="form-control">
+                            @item.Problem.DesTitle
+                        </span>
+                    </td>
+                    <td>
+                        <a class="btn btn-default" href="/Problem/Visualization?id=@(item.NidProblem)">Acessar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

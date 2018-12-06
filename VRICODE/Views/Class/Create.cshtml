@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Turma (Nova)";
+}
+
+<form asp-controller="Class" asp-action="Create" method="POST" class="col-xs-8 col-xs-offset-2">
+        <div class="row">
+            <label class="form-label">Nome</label>
+            <input name="NamClass" type="text" class="form-control">
+        </div>
+            <br>
+            <br>
+            <button class="btn btn-primary pull-right" type="submit">Salvar Turma</button>
+        </div>    
+</form>

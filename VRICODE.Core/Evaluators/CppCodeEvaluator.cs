@@ -83,10 +83,11 @@ namespace VRICODE.Core.Evaluators
 
                 for (int i = 0; i < AInputs.Length; i++)
                 {
-                    LBinProcess.StandardInput.Write(AInputs[i] + "\n");
+                    LBinProcess.StandardInput.WriteLine(AInputs[i]);
+                    Thread.Sleep(100);
                 }
 
-                bool LGracefulExit = LBinProcess.WaitForExit(1000);
+                bool LGracefulExit = LBinProcess.WaitForExit(10000);
                 if (!LGracefulExit)
                 {
                     LCodeResult.Status = EvaluatorStatus.TimeLimit;

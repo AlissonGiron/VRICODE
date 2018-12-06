@@ -11,6 +11,9 @@ namespace VRICODE.Core.CodeRunners
     {
         public static CodeRunnerOutput Run(string ACode, string AInput)
         {
+            string LBaseDir = "C\\Temp\\";
+
+
             CodeRunnerOutput LOutput = new CodeRunnerOutput
             {
                 Status = CodeRunnerStatus.Success

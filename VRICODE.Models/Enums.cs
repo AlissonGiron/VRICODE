@@ -10,10 +10,10 @@ namespace VRICODE.Models
         Student
     }
 
-    public enum CodeRunnerStatus
+    public enum EvaluatorStatus
     {
         Success,
         CompilerError,
-        TimeLimit
+        WrongAnswer
     }
 }

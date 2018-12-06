@@ -6,9 +6,11 @@ namespace VRICODE.Core
 {
     public class ClassCore : VRICODECoreBase<Class>, IClassCore
     {
-        private IClassRepository Repository {
-            get {
-                return (IClassRepository) FRepository;   
+        private IClassRepository Repository
+        {
+            get
+            {
+                return (IClassRepository)FRepository;
             }
         }
 

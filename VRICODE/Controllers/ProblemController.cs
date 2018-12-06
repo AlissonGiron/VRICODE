@@ -1,12 +1,11 @@
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using VRICODE.Core.CodeRunners;
+using VRICODE.Core.Evaluators;
 using VRICODE.Interfaces.Core;
 using VRICODE.Models;
+using VRICODE.Models.ViewModels;
 
 namespace VRICODE.Controllers
 {
@@ -41,20 +40,21 @@ namespace VRICODE.Controllers
             }
         }
 
-        public IActionResult Visualization()
+        public IActionResult Visualization(int id)
         {
-            Problem LProblem = new Problem();
-            LProblem.DesTitle = "Exercicio 0341: dojoijiowejqoe";
-            LProblem.DesProblem = "ew1ewedkiojiojioejiw1e2";
+            return View(FCore.Get(id));
+        }
 
-            LProblem.ProblemTests = new List<ProblemTest>() {
-                new ProblemTest() { FlgVisibleToUser = false, DesTestInput = "15", DesTestExpectedOutput = "25" },
-                new ProblemTest() { FlgVisibleToUser = true, DesTestInput = "14", DesTestExpectedOutput = "312" },
-                new ProblemTest() { FlgVisibleToUser = true, DesTestInput = "10", DesTestExpectedOutput = "523" },
-                new ProblemTest() { FlgVisibleToUser = false, DesTestInput = "153", DesTestExpectedOutput = "43523" }
-            };
+        public IActionResult Evaluate(int ANidProblem, string ADesCode)
+        {
+            Problem LProblem = FCore.Get(ANidProblem);
 
-            return View(LProblem);
+            string[] LInputs = LProblem.ProblemTests.Select(p => p.DesTestInput).ToArray();
+            string[] LOutputs = LProblem.ProblemTests.Select(p => p.DesTestExpectedOutput).ToArray();
+
+            EvaluatorOutput LResult = CppCodeEvaluator.Evaluate(ADesCode, LInputs, LOutputs);
+
+            return Json(LResult);
         }
     }
 }

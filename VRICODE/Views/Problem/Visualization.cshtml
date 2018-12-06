@@ -32,7 +32,7 @@
 
                         <code class="row">
                             <label class="form-label">Código</label>
-                            <textarea rows="20" type="text" class="form-control"></textarea>
+                            <textarea class="code-area" rows="20" type="text" class="form-control"></textarea>
                         </code>
 
 
@@ -41,7 +41,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn primary send-button"><span class="glyphicon glyphicon-import"></span> Enviar Código</button>
+                <button type="button" class="btn primary send-button" onclick="sendProblemCode(@Model.NidProblem)"><span class="glyphicon glyphicon-import"></span> Enviar Código</button>
             </div>
         </div>
     </div>
@@ -86,3 +86,17 @@
     <br>
     <br>
 </div> 
+
+<script>
+    function sendProblemCode(nidProblem) {
+        $.post({
+            url: '@Url.Action("Evaluate", "Problem")',
+            data: {
+                ANidProblem: nidProblem,
+                ADesCode: $('.code-area').val()
+            }
+        }).done((result) => {
+            console.log(result);
+        });
+    }
+</script>

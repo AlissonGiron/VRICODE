@@ -4,9 +4,9 @@ using System.Text;
 
 namespace VRICODE.Models.ViewModels
 {
-    public class CodeRunnerOutput
+    public class EvaluatorOutput
     {
-        public CodeRunnerStatus Status { get; set; }
+        public EvaluatorStatus Status { get; set; }
 
         public string Output { get; set; }
     }

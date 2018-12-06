@@ -1,4 +1,6 @@
-﻿using VRICODE.Interfaces.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using VRICODE.Interfaces.Data;
 using VRICODE.Models;
 
 namespace VRICODE.Data
@@ -7,7 +9,13 @@ namespace VRICODE.Data
     {
         public ProblemRepository(VRICODEContext AContext) : base(AContext)
         {
+        }
 
+        public override Problem Get(params object[] AKeys)
+        {
+            return FDbSet
+                .Include(p => p.ProblemTests)
+                .FirstOrDefault(p => p.NidProblem == (int)AKeys[0]);
         }
     }
 }

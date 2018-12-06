@@ -20,7 +20,7 @@ namespace VRICODE.Data
 
         public override Class Get(params object[] AKeys)
         {
-            return FContext.Classes.Include(s => s.ProblemClasses).AsQueryable().FirstOrDefault(s => s.NidClass == (int) AKeys.FirstOrDefault());
+            return FContext.Classes.Include(s => s.ProblemClasses).ThenInclude(s => s.Problem).AsQueryable().FirstOrDefault(s => s.NidClass == (int) AKeys.FirstOrDefault());
         }
 
 

@@ -19,20 +19,27 @@ namespace VRICODE.Controllers
             FCore = ACore;
         }
 
-        public IActionResult Create()
+        public IActionResult Create(int ANidClass)
         {
-            return View();
+            return View(ANidClass);
         }
 
         [HttpPost]
-        public IActionResult Create(Problem AProblem)
+        public IActionResult Create(Problem AProblem, int ANidClass)
         {
             try
             {
                 FCore.Create(AProblem);
                 FCore.Save();
 
-                return RedirectToAction("Index", "Class");
+                ProblemClass LProblemClass = new ProblemClass();
+                LProblemClass.NidClass = ANidClass;
+                LProblemClass.NidProblem = AProblem.NidProblem;
+
+                FCore.CreateProblemClass(LProblemClass);    
+
+
+                return RedirectToAction("Visualization", "Class", new { ANidClass = ANidClass });
             }
             catch (Exception ex)
             {

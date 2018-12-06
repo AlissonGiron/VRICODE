@@ -27,8 +27,6 @@ namespace VRICODE.Controllers
 
         public IActionResult Visualization()
         {
-            
-
             Class LClass = new Class();
             LClass.NamClass = "ewewer234rffdsfs";
 

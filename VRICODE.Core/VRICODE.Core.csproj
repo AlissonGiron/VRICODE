@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VRICODE.Data.Interfaces\VRICODE.Interfaces.csproj" />
+    <ProjectReference Include="..\VRICODE.Models\VRICODE.Models.csproj" />
   </ItemGroup>
 
 </Project>

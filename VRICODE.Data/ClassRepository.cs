@@ -9,5 +9,12 @@ namespace VRICODE.Data
         {
 
         }
+
+        public void CreateUserClass(UserClass AUserClass)
+        {
+            FContext.Add(AUserClass);
+            FContext.SaveChanges();
+        }
+
     }
 }

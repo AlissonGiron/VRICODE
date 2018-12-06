@@ -1,43 +1,16 @@
 @{
-    ViewData["Title"] = "Group";
+    ViewData["Title"] = "Exercício (Novo)";
 }
 
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-
-<style>
-    body {
-        background-color: grey;
-        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,1)), url("/images/background-login.JPG");
-        background-size: cover;
-        height: 100vh;
-        overflow: hidden;
-    }
-
-    .vri-content {
-        height: calc(100vh - 50px);
-        background-color: white;
-        padding: 0;
-        z-index: 10;
-        margin-top: 50px;
-    }
-</style>
-
-<div class="row">
-    <div class="col-xs-12 vri-content">
-        <div class="jumbotron">
-            <h3>Exercicio (Novo)</h3>
-        </div>
-
-        <div class="col-xs-8  col-xs-offset-2">
+<form asp-controller="Problem" asp-action="Create" method="POST" class="col-xs-8 col-xs-offset-2">
             <div class="row">
                 <label class="form-label">Título</label>
-                <input type="text" class="form-control">
+                <input name="DesTitle" type="text" class="form-control">
             </div>
             <br>
             <div class="row">
                 <label class="form-label">Enunciado</label>
-                <textarea class="form-control"></textarea>
+                <textarea name="DesProblem" class="form-control"></textarea>
             </div>
 
             <br>
@@ -52,26 +25,17 @@
                     <th scope="col">Visivel para estudantes</th>
                     <th scope="col">Input</th>
                     <th scope="col">Output</th>
+                    <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td>1</td>
-                        <td>2</td>
-                    </tr>
+                <tbody id="testValues">
                 </tbody>
                 </table>
-
-
             <br>
             <br>
-            <button class="btn btn-primary pull-right">Salvar Exercício</button>
+            <button class="btn btn-primary pull-right" type="submit">Salvar Exercício</button>
         </div>    
-
-    </div>
-</div>
-
+</form>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -85,20 +49,19 @@
       <div class="modal-body">
           <div class="row">
             <div class="col-xs-8 col-xs-offset-2">
-
                 <div class="row">
                     <label class="form-label">Input</label>
-                    <input type="text" class="form-control">
+                    <input id="inputTest" type="text" class="form-control">
                 </div>
                 <br>
                 <div class="row">
                     <label class="form-label">Output</label>
-                    <input type="text" class="form-control">
+                    <input id="outputTest" type="text" class="form-control">
                 </div>
                 <br>
                 <div class="row">
                     <label class="form-label">Visivel para estudantes</label>
-                    <input type="checkbox" checked>
+                    <input id="visibleTest" type="checkbox" checked>
                 </div>
             </div>
           </div>
@@ -106,8 +69,58 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Criar Teste</button>
+        <button type="button" onclick="AddTest(event)" class="btn btn-primary">Criar Teste</button>
       </div>
     </div>
   </div>
 </div>
+
+<script id="row_template" type="text/template">
+    <tr id="{{index}}">
+        <td>
+            <input type="checkbox" name="ProblemTests[{{index}}].FlgVisibleToUser" value="true" {{checked}}>
+            <input type="hidden" name="ProblemTests[{{index}}].FlgVisibleToUser" value="false">
+        </td>
+        <td><input type="text" readonly name="ProblemTests[{{index}}].DesTestInput" value="{{input}}"/></td>
+        <td><input type="text" readonly name="ProblemTests[{{index}}].DesTestExpectedOutput" value="{{output}}"/></td>
+        <td><a onclick="RemoveTest(this)"><span class="glyphicon glyphicon-remove"></span> Remover</a></td>
+    </tr>
+</script>
+
+<script>
+    var test_rows = []
+
+    function AddTest(e) {
+        var row = $("#row_template").html();
+
+        var input = $("#inputTest").val();
+        var output = $("#outputTest").val();
+        var visible = $("#visibleTest:checked").length > 0;
+
+        row = row.replace("{{checked}}", (visible ? "checked" : 0));
+        row = row.replace("{{input}}", input);
+        row = row.replace("{{output}}", output);
+
+        test_rows.push(row);
+
+        fillTable();
+    }
+
+    function fillTable() {
+        $("#testValues").html("");
+
+        for(var i = 0; i < test_rows.length; i++)
+        {
+            row = test_rows[i].replace(/{{index}}/g, i);
+            $("#testValues").append(row);
+        }
+    }
+
+    function RemoveTest(obj) {
+        var test_index = parseInt($(obj).parent().parent().attr("id"));
+
+        test_rows = test_rows.filter(function(t, index) { return index != test_index; });
+        
+        fillTable();
+    }
+</script>

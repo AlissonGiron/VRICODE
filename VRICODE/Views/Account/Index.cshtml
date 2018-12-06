@@ -1,0 +1,125 @@
+@{
+    ViewData["Title"] = "Entrar";
+    ViewData["LoginPage"] = true;
+}
+
+<style>
+
+    .login-form {
+        height: 80vh;
+        background-color: white;
+        margin-top: 10vh;
+        padding: 0;
+        z-index: 10;
+    }
+
+    .login-form div {
+        opacity: 1;
+    }
+
+    .btn-primary {
+        padding: 15px 30px;
+        box-shadow: 2px 2px 0px darkslategrey;
+        border-radius: 0;
+        float: right;
+        font-size: 12px;
+        margin: 2px;
+    }
+
+    .btn-primary span {
+        color: white;
+    }
+
+    input.form-control {
+        border-radius: 0;
+    }
+
+    #footer-info {
+        position: absolute;
+        right: 10px;
+        text-align: right;
+        bottom: 0;
+        color: white;
+        font-size: 10px;
+    }
+
+    .ball {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: white;
+        border-radius: 100%;
+    }
+</style>
+
+<div class="row">
+    <form id="login" class="col-xs-6 col-xs-offset-3" asp-controller="Account" asp-action="SignIn" method="POST">
+            <div class="row">
+                <label>
+                    <span class="glyphicon glyphicon-user" style="color: steelblue; text-align: center;"></span> 
+                    Usuário
+                </label>
+                <input name="NamUser" class="form-control" type="text" value=""/>
+            </div>
+            <br>
+            <div class="row">
+                <label>
+                    <span class="glyphicon glyphicon-file" style="color: steelblue; text-align: center;"></span> 
+                    Senha
+                </label>
+                <input name="DesPassword" class="form-control" type="password" value=""/>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <button type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-log-in" style="text-align: center;"></span> 
+                     Entrar
+                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    <span class="glyphicon glyphicon-list-alt" style="text-align: center;"></span> 
+                    Não tenho conta
+                </button>
+        </div>
+    </form>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form asp-controller="Account" asp-action="Create" method="POST">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-8 col-xs-offset-2">
+                            <div class="row">
+                                <label class="form-label">Nome de Usuário</label>
+                                <input name="NamUser" type="text" class="form-control">
+                            </div>
+                        
+                            <div class="row">
+                                <label class="form-label">Email</label>
+                                <input name="DesEmail" type="text" class="form-control">
+                            </div>
+
+                            <div class="row">
+                                <label class="form-label">Senha</label>
+                                <input name="DesPassword" type="password" class="form-control">
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Criar Usuário</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>

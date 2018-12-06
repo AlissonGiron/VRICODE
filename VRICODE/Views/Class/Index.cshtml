@@ -4,14 +4,16 @@
 
 @model List<Class>
 
-<div class="col-xs-12">
-        <h4>Ingressar em uma turma</h4>
-        <div class="col-xs-">
-            <input type="text" class="col-xs-8" placeholder="Digite o código da Turma:">
-        </div>
-        <div class="col-xs-2">
-            <button class="btn btn-primary">Entrar na Turma</button>
-        </div>
+    <div class="col-xs-12">
+        <form asp-action="JoinClass" asp-controller="Class" method="POST">
+            <h4>Ingressar em uma turma</h4>
+            <div class="col-xs-">
+                <input type="text" name="ANidClass" class="col-xs-8" placeholder="Digite o código da Turma:">
+            </div>
+            <div class="col-xs-2">
+                <button type="submit" class="btn btn-primary">Entrar na Turma</button>
+            </div>
+        </form>
         <div class="col-xs-2">
             <a class="btn btn-primary" href="/Class/Create">Criar nova Turma</a>
         </div>
@@ -30,7 +32,7 @@
                             </span>
                         </td>
                         <td>
-                            <a href=" class="btn btn-default">Acessar</a>
+                            <a href="/Class/Visualization?ANidClass=@(item.NidClass)" class="btn btn-default">Acessar</a>
                         </td>
                     </tr>
                 }

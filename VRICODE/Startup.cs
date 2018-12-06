@@ -41,7 +41,7 @@ namespace VRICODE
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromDays(10);
                 options.Cookie.HttpOnly = true;
             });
 
@@ -100,7 +100,7 @@ namespace VRICODE
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Account}/{action=Index}/{id?}");
             });
 
         }

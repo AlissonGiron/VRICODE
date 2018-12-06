@@ -20,18 +20,18 @@ namespace VRICODE.Controllers
             FCore = ACore;
         }
 
-        public IActionResult Index() 
+        public IActionResult Index()
         {
-            return View();
+            int nid = (int) HttpContext.Session.GetInt32("NidUser");
+
+            List<Class> LClasses = FCore.FindBy(t => t.UserClasses.Any(s => s.NidUser == nid), true).ToList();
+
+            return View(LClasses);
         }
 
-        public IActionResult Visualization()
+        public IActionResult Visualization(int ANidClass)
         {
-            Class LClass = new Class();
-            LClass.NamClass = "ewewer234rffdsfs";
-
-            LClass.ProblemClasses = new List<ProblemClass>();
-
+            Class LClass = FCore.Get(ANidClass);
             return View(LClass);
         }
 
@@ -49,12 +49,35 @@ namespace VRICODE.Controllers
                 FCore.Save();
 
                 UserClass LUserClass = new UserClass(); 
-                LUserClass.NidUser = (int) HttpContext.Session.GetInt32("NidUser");
+                var nid = HttpContext.Session.GetInt32("NidUser");
+
+                LUserClass.NidUser = (int) nid;
                 LUserClass.NidClass = AClass.NidClass;
 
                 FCore.CreateUserClass(LUserClass);
 
                 return RedirectToAction("Index", "Class");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult JoinClass(int ANidClass)
+        {
+            try
+            {
+                UserClass LUserClass = new UserClass(); 
+                var nid = HttpContext.Session.GetInt32("NidUser");
+
+                LUserClass.NidUser = (int) nid;
+                LUserClass.NidClass = ANidClass;
+
+                FCore.CreateUserClass(LUserClass);
+
+                return RedirectToAction("Visualization", "Class", new { ANidClass = ANidClass });
             }
             catch(Exception ex)
             {

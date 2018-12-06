@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VRICODE.Interfaces.Core;
 using VRICODE.Models;
@@ -26,6 +27,8 @@ namespace VRICODE.Controllers
 
         public IActionResult Visualization()
         {
+            
+
             Class LClass = new Class();
             LClass.NamClass = "ewewer234rffdsfs";
 
@@ -43,8 +46,15 @@ namespace VRICODE.Controllers
         public IActionResult Create(Class AClass)
         {
             try {
+
                 FCore.Create(AClass);
                 FCore.Save();
+
+                UserClass LUserClass = new UserClass(); 
+                LUserClass.NidUser = (int) HttpContext.Session.GetInt32("NidUser");
+                LUserClass.NidClass = AClass.NidClass;
+
+                FCore.CreateUserClass(LUserClass);
 
                 return RedirectToAction("Index", "Class");
             }

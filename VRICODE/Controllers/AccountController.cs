@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VRICODE.Interfaces.Core;
 using VRICODE.Models;
@@ -41,11 +42,18 @@ namespace VRICODE.Controllers
         [HttpPost]
         public IActionResult SignIn(User AUser)
         {
-            try {
-
-                // Fazer Login
+            try 
+            {
+                User LUser = FCore.FindBy(t => t.NamUser == AUser.NamUser && t.DesPassword == AUser.DesPassword, true).FirstOrDefault();
                 
-                return View("Index", "Home");
+                if(LUser == null)
+                {
+                    throw new Exception("Usuário ou senha incorretos");
+                }
+
+                HttpContext.Session.SetInt32("NidUser", LUser.NidUser);
+
+                return RedirectToAction("Index", "Home");
             }
             catch(Exception ex)
             {

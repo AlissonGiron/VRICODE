@@ -36,6 +36,15 @@ namespace VRICODE
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+            });
+
             string LConnectionString = Configuration.GetConnectionString("Default");
 
             services.AddDbContext<VRICODEContext>(options => options.UseSqlServer(LConnectionString));
@@ -86,12 +95,14 @@ namespace VRICODE
                 LContext.Database.Migrate();
             }
 
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }
